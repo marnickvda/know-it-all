@@ -1,6 +1,6 @@
 {
   "name": "pop-quiz",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
   "author": {
     "name": "Marnick van der Arend"

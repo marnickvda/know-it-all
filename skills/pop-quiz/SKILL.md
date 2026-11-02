@@ -21,7 +21,7 @@ Else if the user named a topic or file, that is the scope. If it wasn't touched 
 
 Otherwise, use sources richest-first:
 - **This session** — the alternatives you rejected and why. The diff only shows what survived.
-- **Git** — scope and exact facts. Base: `git merge-base HEAD main`, else `master`, else `git symbolic-ref refs/remotes/origin/HEAD`; then `git diff <base>..HEAD` and `git log <base>..HEAD --oneline`. No base: `git diff HEAD` and `--staged`. No repo: the conversation.
+- **Git** — scope and exact facts. Base: `git merge-base HEAD main`, else `master`, else `git symbolic-ref refs/remotes/origin/HEAD`; then `git diff <base>..HEAD` and `git log <base>..HEAD --oneline`. No base: `git diff HEAD` and `--staged`. No repo: the conversation. Then run `gh pr view --json number,state`: if the branch has an open PR, this is a **PR quiz** too (steps 3 and 7), and its description and comments count as written rationale.
 - **Written rationale** — why-comments, ADRs, design docs, linked PRs/issues.
 
 **Someone else's work** (a team mate's PR, a fresh session): you don't know what the author rejected. Use only alternatives stated in the PR, its comments or docs. Alternatives you see yourself are fine, but label them in the question as your own analysis ("one option I'd weigh…"), never as the author's reasoning.
@@ -56,7 +56,7 @@ POP QUIZ · rate limiter
  ✓ correct   ◐ partial   ✗ missed   ▶ now   ○ to come
  then: scorecard → parked questions
 ```
-For a PR scope, add `→ design-review` to the `then:` line. If a deep dive opens a topic worth testing, add it to the map and say so.
+For a PR quiz (a named PR, or the branch's open PR), add `→ design-review` to the `then:` line. If a deep dive opens a topic worth testing, add it to the map and say so.
 
 ## 4. Run the quiz
 
@@ -89,7 +89,7 @@ Give it for whatever was answered, even two questions, in this order: **decision
 
 ## 7. Hand off to design-review
 
-When the scope was a PR, end by offering a short choice in the question tool:
+For a PR quiz, end by offering a short choice in the question tool:
 - **Run `design-review` now (recommended)** — same session; it reads the quiz from the conversation.
 - **Write a handoff file** — for `design-review` in a new session.
 
