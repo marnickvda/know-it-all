@@ -13,9 +13,9 @@ If the user wants the work *explained*, this is the wrong skill — do a walkthr
 
 ## 1. Gather material silently
 
-If the user named a topic or file, that is the scope. If it wasn't touched this session, ask whether to quiz the code as-is or the actual changes.
+If the user named a **PR** (number or URL), that is the scope. Run `gh pr view <n>` for the description **and**, separately, `gh pr view <n> --comments` (it omits the description) for review comments. Then read the diff (`gh pr diff <n>`) and the **full changed files** at the PR head (`git fetch origin pull/<n>/head`, then `git show <sha>:<path>`; outside a clone, `gh api`). The PR need not be checked out.
 
-If the user named a **PR** (number or URL), that is the scope. Run `gh pr view <n>` for the description **and**, separately, `gh pr view <n> --comments` (it omits the description) for review comments. Read, the diff (`gh pr diff <n>`), and the **full changed files** at the PR head (`git fetch origin pull/<n>/head`, then `git show <sha>:<path>`; outside a clone, `gh api`). The PR need not be checked out.
+Else if the user named a topic or file, that is the scope. If it wasn't touched this session, ask whether to quiz the code as-is or the actual changes.
 
 Otherwise, use sources richest-first:
 - **This session** — the alternatives you rejected and why. The diff only shows what survived.
@@ -52,10 +52,9 @@ POP QUIZ · rate limiter
  ○  4. When Redis goes down            failure mode
 
  ✓ correct   ◐ partial   ✗ missed   ▶ now   ○ to come
- then: scorecard → parked questions → design-review
+ then: scorecard → parked questions
 ```
-
-If a deep dive opens a topic worth testing, add it to the map and say so.
+For a PR scope, add `→ design-review` to the `then:` line. If a deep dive opens a topic worth testing, add it to the map and say so.
 
 ## 4. Run the quiz
 

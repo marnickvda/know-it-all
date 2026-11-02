@@ -11,7 +11,7 @@ Walk the user through design-level review comments on a PR, **one comment per me
 
 ## 1. Gather
 
-Run inside a local clone of the PR's repo. Get the quiz results, richest first:
+Run inside a local clone of the PR's repo. No number given: `gh pr view --json number` finds the PR of the current branch. Get the quiz results, richest first:
 - **This conversation** — a pop-quiz on this PR just ran: use its answer key, grades, gaps, parked questions.
 - **Handoff file** — `<git common dir>/pop-quiz/pr-<n>.md` (`git rev-parse --path-format=absolute --git-common-dir`). Compare its `## PR` head SHA with `gh pr view <n> --json headRefOid`. **If they differ, stop:** tell the user both SHAs and ask whether to use the notes anyway, re-check them, or ignore them. Wait for the answer.
 - **Neither** — build the answer key yourself (step 2), without quizzing the user.
@@ -38,7 +38,7 @@ First message, all in one: one line on what you checked (sources), any dropped o
 | 1 | `queue/worker.go:52` | Docs say at-most-once; code retries |
 | 2 | `PR-wide` | No way to switch the new cache off without a deploy |
 
-Each comment gets **its own message**, in exactly this shape:
+After that, each comment gets **its own message**, in exactly this shape:
 
 ````
 **Comment 2 of 4 · cache/cache.go:41 · rollout risk**

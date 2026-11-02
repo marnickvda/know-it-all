@@ -1,6 +1,6 @@
 {
   "name": "pop-quiz",
-  "description": "The agent quizzes you on the code it just wrote.",
+  "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
   "owner": {
     "name": "Marnick van der Arend"
   },
