@@ -1,7 +1,7 @@
 {
   "name": "pop-quiz",
-  "version": "0.4.0",
-  "description": "The agent quizzes you on what it just built — concepts, terms, and the design tradeoffs behind each choice.",
+  "version": "0.5.0",
+  "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
   "author": {
     "name": "Marnick van der Arend"
   },
@@ -15,6 +15,8 @@
     "tradeoffs",
     "code-review",
     "understanding",
-    "socratic"
+    "socratic",
+    "pr-review",
+    "design-review"
   ]
 }

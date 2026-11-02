@@ -1,20 +1,27 @@
-# pop-quiz
+# pop-quiz + design-review
 
-An Agent Skill that quizzes **you** on what your agent just built — mostly *"why X over Y?"* — because you don't own a decision you can't defend against the alternative.
+Two Agent Skills. `pop-quiz` quizzes **you** on what your agent just built — mostly *"why X over Y?"* — because you don't own a decision you can't defend against the alternative. `design-review` then turns what stayed unclear into design-level PR review comments.
 
-## How it works
+## pop-quiz
 
-1. **Scopes** to this session's work, a topic you name, or your branch's diff.
-2. **Asks one question at a time**, adapting difficulty — tradeoffs, plus "what if…" and "predict what breaks".
-3. **Grades the answer honestly** (never you), then reveals the rejected alternatives and the deciding tradeoff.
-4. **Ends with a scorecard**: tradeoffs to remember, gaps, strengths.
-5. **Offers to save** takeaways as re-testable notes — only if you say yes.
+### How it works
+
+1. **Scopes** to this session's work, a topic you name, your branch's diff, or a pull request.
+2. **Shows a progress map** (`✓` correct, `◐` partial, `✗` missed, `▶` current, `○` to come).
+3. **Asks one question at a time**, adapting difficulty — tradeoffs, plus "what if…" and "predict what breaks".
+4. **Grades the answer honestly** against a checked answer key (never you), then reveals the rejected alternatives and the deciding tradeoff.
+5. **Pauses between questions**: go to the next one, dig deeper, or park it.
+6. **Ends with a scorecard**: tradeoffs to remember, gaps, strengths.
 
 Runs in your chat language.
 
+## design-review
+
+Reviews a pull request at **design level**, not code level: decisions, tradeoffs and rollout risks, not style or typos. It works through the points one comment at a time. For each comment it shows the diff, and it posts **one review** only after you approve. It works best right after `pop-quiz` in the same session, because the gaps from the quiz become the comments.
+
 ## Install
 
-One `SKILL.md` in the [agentskills.io](https://agentskills.io) standard.
+Each skill is one `SKILL.md` in the [agentskills.io](https://agentskills.io) standard.
 
 **Any agent** — Claude Code, Cursor, opencode, Codex, Copilot, Gemini & 60+ more, via the [vercel `skills`](https://github.com/vercel-labs/skills) CLI:
 
@@ -22,7 +29,7 @@ One `SKILL.md` in the [agentskills.io](https://agentskills.io) standard.
 npx skills add marnickvda/pop-quiz
 ```
 
-**Claude Code plugin** — also gives you the `/pop-quiz` command:
+**Claude Code plugin** — also gives you the `/pop-quiz` and `/design-review` commands:
 
 ```
 /plugin marketplace add marnickvda/pop-quiz
@@ -42,6 +49,12 @@ git clone https://github.com/marnickvda/pop-quiz
 
 - `/pop-quiz` — or scope it: `/pop-quiz the caching layer`
 - Or just ask: *"quiz me on what you built"*
+- `/design-review` — or give a PR: `/design-review 123`
+- Or just ask: *"help me comment on the design of this PR"*
+
+## Changes in 0.5.0
+
+`pop-quiz` no longer offers to save takeaways. The lessons file was removed.
 
 ## License
 

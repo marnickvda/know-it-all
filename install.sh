@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-# Install the pop-quiz skill into every agent tool on this machine.
+# Install the pop-quiz skills into every agent tool on this machine.
 # Zero dependencies — pure POSIX sh. (For a richer installer that auto-detects
 # 70+ agents, use the vercel-labs/skills CLI: `npx skills add <user>/pop-quiz`.)
 #
 # Usage:
-#   ./install.sh             symlink the skill into all known agent dirs (default)
+#   ./install.sh             symlink the skills into all known agent dirs (default)
 #   ./install.sh --copy      copy instead of symlink (Windows / no-symlink envs)
-#   ./install.sh --uninstall remove the skill from all known agent dirs
+#   ./install.sh --uninstall remove the skills from all known agent dirs
 #
 # Targets cover every supported tool:
 #   ~/.agents/skills  -> Cursor, opencode, Codex, Gemini CLI, Copilot CLI
@@ -14,9 +14,7 @@
 
 set -eu
 
-SKILL="pop-quiz"
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-SRC="$SCRIPT_DIR/skills/$SKILL"
 TARGETS="$HOME/.agents/skills $HOME/.claude/skills"
 
 MODE="symlink"
@@ -29,18 +27,25 @@ for arg in "$@"; do
   esac
 done
 
-[ -f "$SRC/SKILL.md" ] || { echo "error: $SRC/SKILL.md not found" >&2; exit 1; }
-
-for base in $TARGETS; do
-  dest="$base/$SKILL"
-  rm -rf "$dest"
-  [ "$MODE" = "uninstall" ] && { echo "removed  $dest"; continue; }
-  mkdir -p "$base"
-  if [ "$MODE" = "copy" ]; then
-    cp -R "$SRC" "$dest"; echo "copied   -> $dest"
-  else
-    ln -s "$SRC" "$dest"; echo "linked   $dest -> $SRC"
-  fi
+FOUND=0
+for manifest in "$SCRIPT_DIR"/skills/*/SKILL.md; do
+  [ -f "$manifest" ] || continue
+  FOUND=1
+  SRC=$(dirname "$manifest")
+  SKILL=$(basename "$SRC")
+  for base in $TARGETS; do
+    dest="$base/$SKILL"
+    rm -rf "$dest"
+    [ "$MODE" = "uninstall" ] && { echo "removed  $dest"; continue; }
+    mkdir -p "$base"
+    if [ "$MODE" = "copy" ]; then
+      cp -R "$SRC" "$dest"; echo "copied   -> $dest"
+    else
+      ln -s "$SRC" "$dest"; echo "linked   $dest -> $SRC"
+    fi
+  done
 done
 
-[ "$MODE" = "uninstall" ] || printf '\nDone. Restart your agent tool to pick up the skill.\n'
+[ "$FOUND" = 1 ] || { echo "error: no skills/*/SKILL.md found in $SCRIPT_DIR" >&2; exit 1; }
+
+[ "$MODE" = "uninstall" ] || printf '\nDone. Restart your agent tool to pick up the skills.\n'
