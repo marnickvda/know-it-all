@@ -7,6 +7,8 @@ description: Use after a pop-quiz on a pull request, or when the user wants to c
 
 Walk the user through design-level review comments on a PR, **one comment per message**, then post the approved ones as **one** GitHub review. The user approves every word; nothing goes to GitHub before they pick the review type.
 
+**Short choices** go through your harness's question tool when it has one (e.g. `AskUserQuestion` in Claude Code, `question` in OpenCode): one option per choice, so the user picks from a popup. Put the drafts and context in the message text first; the popup carries only the options. No such tool: list the options as plain text and stop.
+
 **In scope:** design decisions, rollout and rollback risks, failure modes, third-party defaults the code relies on, docs or comments that disagree with real behavior. **Out of scope:** code-level bugs, style, tests, naming. A code-level bug is a comment only when it makes behavior contradict the docs or PR description; then frame it as a question about that mismatch, not a fix. Otherwise mention it to the user in one line and move on.
 
 ## 1. Gather
@@ -55,10 +57,9 @@ After that, each comment gets **its own message**, in exactly this shape:
 1. **Drafted:** > <the full comment>
 2. **Shorter:** > <one sentence>
 3. **Different angle or place:** > <e.g. a question instead, or move to the review body>
-4. **Skip**
-
-Or write your own.
 ````
+
+Then offer a short choice in the question tool: **Drafted**, **Shorter**, **Different angle**, **Skip**. The user can also write their own.
 
 Copy the hunk header and context lines from `gh pr diff`. Mark the commented line(s). For a range, mark each line. **`PR-wide` comments:** header says `PR-wide`, no diff block, and say it goes in the review body. Then stop and wait.
 
@@ -70,7 +71,7 @@ Short, plain language, one point per comment. Prefix nits with `nit:`. Mark non-
 
 ## 6. Review type, post, verify
 
-After the last comment, list the approved comments and offer a short choice: **Comment**, **Approve**, or **Request changes**, each with a drafted summary body (PR-wide comments go in it). Post nothing until the user picks.
+After the last comment, list the approved comments, each review type's drafted summary body (PR-wide comments go in it), then offer a short choice in the question tool: **Comment**, **Approve**, or **Request changes**. Post nothing until the user picks.
 
 Then post **one** review. Build the payload in a file (a script or a heredoc into a `.json` file), never inline shell quoting:
 
