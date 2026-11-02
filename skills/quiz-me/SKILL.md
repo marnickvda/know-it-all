@@ -1,9 +1,9 @@
 ---
-name: pop-quiz
-description: Use when the user wants to be quizzed or tested on work that was just built for them, or on a pull request by number or URL, including a team mate's. Triggers include "quiz me", "test my understanding", "do I actually get this", "pop quiz on what you built", "test me on this branch", "quiz me on PR #123". Not for explaining or re-teaching the work — only when they want to be tested on it.
+name: quiz-me
+description: Use when the user wants to be quizzed or tested on work that was just built for them, or on a pull request by number or URL, including a team mate's. Triggers include "quiz me", "test my understanding", "do I actually get this", "test me on this branch", "quiz me on PR #123". Not for explaining or re-teaching the work — only when they want to be tested on it.
 ---
 
-# Pop Quiz
+# Quiz Me
 
 Give the user a one-question-at-a-time oral exam on the work, centered on **why each decision beat its rejected alternatives**. Grade the answer, never the person; the goal is better calls next time.
 
@@ -46,7 +46,7 @@ Do these checks before question 1, not on demand. Open with a line saying what y
 Show the quiz as a map of **topics, not questions** (no answers leaked). Show it at the start and again, updated, above every new question. Use exactly these symbols, then the legend, then what follows the quiz:
 
 ```
-POP QUIZ · rate limiter
+QUIZ ME · rate limiter
 
  ✓  1. Token bucket vs sliding log     warm-up
  ▶  2. Where the counters live         tradeoff
@@ -54,7 +54,7 @@ POP QUIZ · rate limiter
  ○  4. When Redis goes down            failure mode
 
  ✓ correct   ◐ partial   ✗ missed   ▶ now   ○ to come
- then: scorecard → parked questions
+ then: assessment summary → parked questions
 ```
 For a PR quiz (a named PR, or the branch's open PR), add `→ design-review` to the `then:` line. If a deep dive opens a topic worth testing, add it to the map and say so.
 
@@ -64,7 +64,7 @@ For a PR quiz (a named PR, or the branch's open PR), add `→ design-review` to 
 - Mostly *"why X over Y"*, plus at least one **transfer** ("same design, now \<new constraint\> — what gives?") and one **prediction** ("where does this break under \<stress\>?"). Recall is for warm-ups only.
 - Ask confidence before grading: low / medium / high.
 - Aim for ~70% correct: after two weak answers, scaffold down; after two sharp ones, jump to the hardest tradeoff or a transfer.
-- "I don't know" / "just tell me" → answer plainly, mark it unanswered. "Stop" → scorecard. Repeated wipeouts → switch to a guided walkthrough: explain, then ask.
+- "I don't know" / "just tell me" → answer plainly, mark it unanswered. "Stop" → assessment summary. Repeated wipeouts → switch to a guided walkthrough: explain, then ask.
 
 | Type | Example |
 |------|---------|
@@ -81,9 +81,9 @@ Each answer gets one message, in this shape:
 3. **A short choice "What next?" in the question tool, and stop** — do not ask the next question in this message:
    - **Next question**
    - **Dig deeper** — free back-and-forth on this topic. No grading, no limit; the user says when to move on.
-   - **Park it** — note the user's question (ask for it if they only picked the option); you answer it after the scorecard, not now.
+   - **Park it** — note the user's question (ask for it if they only picked the option); you answer it after the assessment summary, not now.
 
-## 6. Scorecard, then parked questions
+## 6. Assessment summary, then parked questions
 
 Give it for whatever was answered, even two questions, in this order: **decisions to remember** (1–3 tradeoffs), **gaps to revisit**, **strengths**, and an optional snapshot score ("solid on the *what*, shakier on failure modes"). Then answer each parked question.
 
@@ -95,7 +95,7 @@ For a PR quiz, end by offering a short choice in the question tool:
 
 Outside a git clone you can't write the file: say so, and offer the same-session option only.
 
-The handoff file goes to `<git common dir>/pop-quiz/pr-<number>.md` (git common dir: `git rev-parse --path-format=absolute --git-common-dir`). Then tell the user the path and to run `design-review` in a new session. Plain markdown, exactly these headings, in order:
+The handoff file goes to `<git common dir>/quiz-me/pr-<number>.md` (git common dir: `git rev-parse --path-format=absolute --git-common-dir`). Then tell the user the path and to run `design-review` in a new session. Plain markdown, exactly these headings, in order:
 
 ```markdown
 ## PR

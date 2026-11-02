@@ -1,6 +1,6 @@
 ---
 name: design-review
-description: Use after a pop-quiz on a pull request, or when the user wants to comment on a PR's design decisions and rollout risks one comment at a time. Design-level, not code-level: tradeoffs, failure modes, third-party defaults, docs that disagree with behavior, rollout and rollback. Triggers include "design review on PR #123", "turn the quiz into review comments", "comment on the design of this PR with me".
+description: Use after quiz-me on a pull request, or when the user wants to comment on a PR's design decisions and rollout risks one comment at a time. Design-level, not code-level: tradeoffs, failure modes, third-party defaults, docs that disagree with behavior, rollout and rollback. Triggers include "design review on PR #123", "turn the quiz into review comments", "comment on the design of this PR with me".
 ---
 
 # Design Review
@@ -14,8 +14,8 @@ Walk the user through design-level review comments on a PR, **one comment per me
 ## 1. Gather
 
 Run inside a local clone of the PR's repo. No number given: `gh pr view --json number` finds the PR of the current branch. Get the quiz results, richest first:
-- **This conversation** — a pop-quiz on this PR just ran: use its answer key, grades, gaps, parked questions.
-- **Handoff file** — `<git common dir>/pop-quiz/pr-<n>.md` (`git rev-parse --path-format=absolute --git-common-dir`). Compare its `## PR` head SHA with `gh pr view <n> --json headRefOid`. **If they differ, stop:** tell the user both SHAs and ask whether to use the notes anyway, re-check them, or ignore them. Wait for the answer.
+- **This conversation** — quiz-me on this PR just ran: use its answer key, grades, gaps, parked questions.
+- **Handoff file** — `<git common dir>/quiz-me/pr-<n>.md` (`git rev-parse --path-format=absolute --git-common-dir`). Compare its `## PR` head SHA with `gh pr view <n> --json headRefOid`. **If they differ, stop:** tell the user both SHAs and ask whether to use the notes anyway, re-check them, or ignore them. Wait for the answer.
 - **Neither** — build the answer key yourself (step 2), without quizzing the user.
 
 Then read the PR: `gh pr view <n>` (description), `gh pr view <n> --comments` (existing review comments), `gh pr diff <n>`, and the **full changed files** at the head (`git fetch origin pull/<n>/head`, `git show <sha>:<path>`).

@@ -1,12 +1,12 @@
 {
-  "name": "pop-quiz",
-  "version": "0.5.2",
+  "name": "know-it-all",
+  "version": "0.6.0",
   "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
   "author": {
     "name": "Marnick van der Arend"
   },
-  "homepage": "https://github.com/marnickvda/pop-quiz",
-  "repository": "https://github.com/marnickvda/pop-quiz",
+  "homepage": "https://github.com/marnickvda/know-it-all",
+  "repository": "https://github.com/marnickvda/know-it-all",
   "license": "MIT",
   "keywords": [
     "quiz",

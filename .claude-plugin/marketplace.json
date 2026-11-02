@@ -1,14 +1,14 @@
 {
-  "name": "pop-quiz",
+  "name": "know-it-all",
   "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
   "owner": {
     "name": "Marnick van der Arend"
   },
   "plugins": [
     {
-      "name": "pop-quiz",
+      "name": "know-it-all",
       "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
-      "version": "0.5.2",
+      "version": "0.6.0",
       "source": "./",
       "author": {
         "name": "Marnick van der Arend"
