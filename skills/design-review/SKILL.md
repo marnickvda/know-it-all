@@ -31,7 +31,7 @@ Sources: quiz gaps and parked questions that are real questions for the author; 
 - **Already covered?** If the PR description or an existing comment already states the point, drop it or narrow it to what is new. Tell the user which, and quote the line that covers it.
 - **Anchor** each comment on a changed line (right side of the diff); GitHub rejects others. A point about the PR as a whole (rollback, rollout plan, missing kill switch) or about unchanged code is **`PR-wide`**: it goes in the review body, never inline.
 
-## 4. Overview, then walkthrough
+## 4. Overview, then one comment at a time
 
 First message, all in one: one line on what you checked (sources), any dropped or narrowed points with why, then the overview table, then comment 1.
 
