@@ -1,7 +1,7 @@
 {
   "name": "know-it-all",
-  "version": "0.6.0",
-  "description": "Quiz yourself on a change, then turn what stayed unclear into design-level PR review comments.",
+  "version": "0.7.0",
+  "description": "Walk through a change in the order it runs, quiz yourself on it, then turn what stayed unclear into design-level PR review comments.",
   "author": {
     "name": "Marnick van der Arend"
   },
@@ -9,6 +9,8 @@
   "repository": "https://github.com/marnickvda/know-it-all",
   "license": "MIT",
   "keywords": [
+    "walkthrough",
+    "code-tour",
     "quiz",
     "active-learning",
     "learning",
