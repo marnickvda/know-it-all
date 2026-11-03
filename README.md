@@ -2,21 +2,21 @@
 
 Agent Skills for understanding a code change's design deeply, then replying to its pull request thoughtfully. It works for a change your agent built for you and for a team mate's PR you need to review.
 
-- `walkthrough` explains the change as a slide deck in the order the code runs, so you understand it before anything else.
+- `walkthrough` explains the change step by step in the order the code runs, so you understand it before anything else.
 - `quiz-me` then quizzes **you** on the change — mostly *"why X over Y?"* — because you don't own a decision you can't defend against the alternative.
 - `design-review` then turns what stayed unclear into design-level PR review comments.
 
 ## walkthrough
 
-Explains a change, or an existing flow, as a slide deck in execution order. It is not a code review, and it does not test you.
+Explains a change, or an existing flow, step by step in execution order. It is not a code review, and it does not test you.
 
 ### How it works
 
 1. **Scopes** to this session's work, a topic you name, your branch's diff, a pull request, or code as-is.
-2. **Shows an overview diagram and a slide map** of the whole flow.
-3. **Shows one slide per message**, in the order the code runs, not the order of the diff.
+2. **Shows an overview diagram and a step map** of the whole flow.
+3. **Shows one step per message**, in the order the code runs, not the order of the diff.
 4. **Includes code from outside the diff**, such as callers, config, and consumers.
-5. **Pauses between slides**: go to the next one, dig deeper, or park it.
+5. **Pauses between steps**: go to the next one, dig deeper, or park it.
 6. **Ends with a recap** and offers to hand off to `quiz-me`.
 
 It also explains existing code as-is, when nothing changed: *"walk me through the auth flow"*.
@@ -74,6 +74,10 @@ git clone https://github.com/marnickvda/know-it-all
 - Or just ask: *"quiz me on what you built"*
 - `/design-review` — or give a PR: `/design-review 123`
 - Or just ask: *"help me comment on the design of this PR"*
+
+## Changes in 0.7.1
+
+All three skills now put their choices at the end of the message as a numbered list, not in a popup. A popup can hide the text before it, so the slide, verdict or draft did not show. `walkthrough` now says "step" instead of "slide".
 
 ## Changes in 0.7.0
 

@@ -9,7 +9,7 @@ Give the user a one-question-at-a-time oral exam on the work, centered on **why 
 
 **Every run must** make the user reason about at least one rejected alternative (if you can't name one, widen scope; never fall back to pure recall), and grade honestly: mark answers partial or missed when they earn it.
 
-**Short choices** go through your harness's question tool when it has one (e.g. `AskUserQuestion` in Claude Code, `question` in OpenCode): one option per choice, so the user picks from a popup. Put the verdict and reveal in the message text first; the popup carries only the options. No such tool: list the options as plain text and stop.
+**Short choices** end the message as a numbered plain-text list, after the content; then stop. The user replies with a number or in their own words. Every message here carries content above its choice, so it all stays in the message text: a question-tool popup can hide the text before it.
 
 If the user wants the work *explained*, this is the wrong skill — use the `walkthrough` skill. If the work is trivial (rename, formatting, version bump), say so and offer to quiz the one judgment call, the surrounding code, or skip.
 
@@ -79,7 +79,7 @@ For a PR quiz (a named PR, or the branch's open PR), add `→ design-review` to 
 Each answer gets one message, in this shape:
 1. **Verdict:** correct / partial / missed. Don't soften a wrong answer. If incomplete, nudge once before revealing.
 2. **Reveal** the rejected alternatives and the deciding tradeoff. Flag confident-and-wrong plainly. Credit different-but-sound answers; if a grade is disputed, re-check the source and own your mistake.
-3. **A short choice "What next?" in the question tool, and stop** — do not ask the next question in this message:
+3. **A short choice "What next?", and stop** — do not ask the next question in this message:
    - **Next question**
    - **Dig deeper** — free back-and-forth on this topic. No grading, no limit; the user says when to move on.
    - **Park it** — note the user's question (ask for it if they only picked the option); you answer it after the assessment summary, not now.
@@ -90,7 +90,7 @@ Give it for whatever was answered, even two questions, in this order: **decision
 
 ## 7. Hand off to design-review
 
-For a PR quiz, end by offering a short choice in the question tool:
+For a PR quiz, end by offering a short choice:
 - **Run `design-review` now (recommended)** — same session; it reads the quiz from the conversation.
 - **Write a handoff file** — for `design-review` in a new session.
 
