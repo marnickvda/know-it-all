@@ -11,7 +11,7 @@ Give the user a one-question-at-a-time oral exam on the work, centered on **why 
 
 **Short choices** go through your harness's question tool when it has one (e.g. `AskUserQuestion` in Claude Code, `question` in OpenCode): one option per choice, so the user picks from a popup. Put the verdict and reveal in the message text first; the popup carries only the options. No such tool: list the options as plain text and stop.
 
-If the user wants the work *explained*, this is the wrong skill — do a walkthrough. If the work is trivial (rename, formatting, version bump), say so and offer to quiz the one judgment call, the surrounding code, or skip.
+If the user wants the work *explained*, this is the wrong skill — use the `walkthrough` skill. If the work is trivial (rename, formatting, version bump), say so and offer to quiz the one judgment call, the surrounding code, or skip.
 
 ## 1. Gather material silently
 
@@ -20,6 +20,7 @@ If the user named a **PR** (number or URL), that is the scope. Run `gh pr view <
 Else if the user named a topic or file, that is the scope. If it wasn't touched this session, ask whether to quiz the code as-is or the actual changes.
 
 Otherwise, use sources richest-first:
+- **A walkthrough earlier in this session** — reuse its checked claims and sourced whys instead of checking them again; keep "my read" items labeled as your own analysis.
 - **This session** — the alternatives you rejected and why. The diff only shows what survived.
 - **Git** — scope and exact facts. Base: `git merge-base HEAD main`, else `master`, else `git symbolic-ref refs/remotes/origin/HEAD`; then `git diff <base>..HEAD` and `git log <base>..HEAD --oneline`. No base: `git diff HEAD` and `--staged`. No repo: the conversation. Then run `gh pr view --json number,state`: if the branch has an open PR, this is a **PR quiz** too (steps 3 and 7), and its description and comments count as written rationale.
 - **Written rationale** — why-comments, ADRs, design docs, linked PRs/issues.
