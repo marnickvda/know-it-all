@@ -78,12 +78,12 @@ Right-column kinds: `entry`, `changed`, `context` (unchanged code needed to foll
 Flow: Client → Middleware → **Token bucket** → Redis
 
 `limiter/bucket.go:40-52` · changed
-```diff
- func (b *Bucket) Take(ctx context.Context, key string) (bool, error) {
-+	n, err := b.store.Decr(ctx, key)
-+	if err != nil {
-+		return true, err   ◀ fails open
-+	}
+```go
+func (b *Bucket) Take(ctx context.Context, key string) (bool, error) {
+	n, err := b.store.Decr(ctx, key)
+	if err != nil {
+		return true, err   ◀ fails open
+	}
 ```
 
 **What happens:** 1–3 sentences.
@@ -95,7 +95,7 @@ Flow: Client → Middleware → **Token bucket** → Redis
 4. **Skip to recap**
 ````
 
-- Changed code: a `diff` block from the PR diff. Unchanged code: a plain fenced block with the language, headed `path:line · context`.
+- Every excerpt is the code as it is at the head, in a fenced block with the language (e.g. `go`, `python`), so it gets syntax highlighting. Never a `diff` block or `+`/`-` prefixes: the walkthrough explains how the code works, the PR diff shows what changed. The header kind (`changed`, `context`) is enough.
 - About 15 lines per excerpt at most. Elide with `…`. Mark the line that matters with `◀`.
 - No step map in a step; the `Flow:` breadcrumb shows the position.
 - End with the short choice, then stop. Never start the next step in the same message:
@@ -120,6 +120,5 @@ A question mid-walkthrough ("where is this called from?") is a dig deeper: answe
 For a flow nobody changed: same sections, with these differences.
 - No `changed` class in the diagram. Kinds are only `entry`, `logic`, `context`, `exit` (`tests` only if the tests explain the flow).
 - The rule that every changed file is in a step or in **Not covered** does not apply.
-- All code in plain fenced blocks with `path:line`. No `diff` blocks.
 - The scope is the flow the user named. Say in the overview where the walkthrough stops (e.g. "stops at the in-memory store").
 - **Why** comes from why-comments, docs, ADRs, and `git log` / `git blame` on the key lines. Else "my read".
